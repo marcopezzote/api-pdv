@@ -1,3 +1,5 @@
+const usuarioService = require("../services/usuarios.service");
+
 const { APIError } = require("../utils/errors");
 
 exports.cadastrar = async (req, res, next) => {
@@ -6,7 +8,7 @@ exports.cadastrar = async (req, res, next) => {
     res.status(201).json({
       status: "success",
       message: "Usuário cadastrado com sucesso",
-      data: usuario,
+      data: { usuario },
     });
   } catch (error) {
     next(error);
@@ -34,4 +36,44 @@ exports.autenticar = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+exports.listar = async (req, res, next) => {
+  try {
+    const usuarios = await usuarioService.listar();
+    res.status(200).json({
+      status: "success",
+      data: { usuarios },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.obterPerfil = async (req, res, next) => {
+  try {
+    const usuario = await usuarioService.obterPerfil(req.usuario.id);
+    res.status(200).json({
+      status: "success",
+      data: { usuario },
+    });
+  } catch (error) {
+    next(error);
+  }
+
+  exports.atualizarPerfil = async (req, res, next) => {
+    try {
+      const usuario = await usuarioService.atualizarPerfil(
+        req.usuario.id,
+        req.body
+      );
+      res.status(200).json({
+        status: "success",
+        message: "Perfil atualizado com sucesso",
+        data: { usuario },
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 };
