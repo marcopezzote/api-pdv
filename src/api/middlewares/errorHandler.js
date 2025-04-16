@@ -1,4 +1,4 @@
-const config = require("../../config");
+const config = require("../../config/env");
 
 module.exports = (err, req, res, next) => {
   const statusCodes = err.statusCodes || 500;
