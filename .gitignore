@@ -1,0 +1,11 @@
+.env
+node_modules
+
+dist
+coverage
+.vscode
+.idea
+*.log
+*.tsbuildinfo
+*.tgz
+*.zip           
