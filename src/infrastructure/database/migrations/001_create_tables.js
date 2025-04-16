@@ -21,11 +21,11 @@ async function createTables() {
     `);
     console.log('✅ Tabela "usuarios" criada');
 
-    // Tabela de categorias
+    // Tabela de categorias - Adicionando UNIQUE na descrição
     await client.query(`
       CREATE TABLE IF NOT EXISTS categorias (
         id SERIAL PRIMARY KEY,
-        descricao VARCHAR(255) NOT NULL,
+        descricao VARCHAR(255) UNIQUE NOT NULL,
         created_at TIMESTAMP DEFAULT NOW(),
         updated_at TIMESTAMP DEFAULT NOW()
       )
